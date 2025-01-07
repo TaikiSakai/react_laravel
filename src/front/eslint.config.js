@@ -43,7 +43,6 @@ export default [
       "semi": ["error", "always"], // セミコロンを必須にする
     },
   },
-
   {languageOptions: { globals: globals.browser }},
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
