@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Api\BaseController;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends BaseController
@@ -30,10 +31,14 @@ class UserController extends BaseController
             return $this->sendError('Validation Error.', [$validator->errors()]);
         }        
 
-        $user = User::create($request->all());
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($request->password),
+        ]);
 
         if ($user->save()) {
-            return $this->sendResponse('User Created', $user);
+            return $this->sendResponse('User Created', [$user]);
         }
     }
 }
