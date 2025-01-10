@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Api\BaseController;
 use App\Models\User;
@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends BaseController
 {
+    /**
+     * creates a new user
+     * 
+     * route: post('/api/user/register')
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function create() 
     {
         return $this->sendError(
@@ -18,6 +25,13 @@ class AuthController extends BaseController
         );
     }
 
+    /**
+     * logs in user
+     * 
+     * route: post('/api/login')
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -27,7 +41,7 @@ class AuthController extends BaseController
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate(); 
-            return redirect()->intended(route('api.logedin')); 
+            return redirect()->intended(route('api.loggedin')); 
         }
 
         return $this->sendError(
@@ -38,12 +52,31 @@ class AuthController extends BaseController
     }
 
     /**
+     * logs out user
+     * 
+     * route: post('/api/logout')
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return $this->sendResponse(
+            'User Logged Out',
+            ['message' => 'User Logged Out'],
+        );
+    }
+
+    /**
      * returns response after login redirect
      * 
      * route: get('/api/loggedin')
      * @return \Illuminate\Http\JsonResponse
      */
-    public function loggedIn(Request $request)
+    public function loggedIn()
     {
         return $this->sendResponse(
             'User Aleady Logged In',
