@@ -15,11 +15,12 @@ return [
     |
     */
 
-    'paths' => ['/api/*', '/sanctum/csrf-cookie'],
+    'paths' => ['api/*', 'sanctum/csrf-cookie', 'login', 'logout'],
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => [env('FRONTEND_URL', 'http://localhost:3000')],
+    // 追記 (SANCTUM_STATEFUL_DOMAINSとは別にした方が良い)
+    'allowed_origins' => explode(',', env('FRONTEND_URL', '*')),
 
     'allowed_origins_patterns' => [],
 
