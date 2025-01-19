@@ -4,6 +4,8 @@ import Grid from '@mui/material/Grid2';
 import axios from 'axios';
 import { useState } from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { useNavigate } from 'react-router';
+import useUserState from '../../hooks/useUserState';
 
 
 type LoginFormData = {
@@ -12,7 +14,9 @@ type LoginFormData = {
 };
 
 const Login = () => {
+  const [user, setUser] = useUserState();
   const [isPending, setIsPending] = useState<boolean>(false);
+  const navigate = useNavigate();
   const { handleSubmit, control } = useForm<LoginFormData>({
     defaultValues: { email: '', password: '' }});
 
@@ -30,7 +34,8 @@ const Login = () => {
     },
   };
 
-
+  console.log('state: login', user);
+  
   const onSubmit: SubmitHandler<LoginFormData> = async (data) => {
     const baseUrl = import.meta.env.VITE_PUBLIC_API_URL;
     const headers = { 'Content-Type': 'application/json'};
@@ -45,12 +50,24 @@ const Login = () => {
       const res = await axios.post(baseUrl + '/login', data, {
         headers: headers,
       });
-
       console.log(res);
+
+      const fetchedUser = await axios.get(baseUrl + '/api/current_user', {
+        headers: headers,
+      });
+      setUser({
+        id: fetchedUser.data.id,
+        name: fetchedUser.data.name,
+        email: fetchedUser.data.email,
+        isSignedIn: true,
+        isFetched: false,
+      });
+      
     } catch (e) {
       console.log(e);
     } finally {
       setIsPending(false);
+      navigate('/dashboard');
     }
   };
 
