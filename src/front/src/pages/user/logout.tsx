@@ -39,7 +39,7 @@ const Logout = () => {
     userSignOut();
   }, []);
 
-  return <></>;
+  return null;
 };
 
 export default Logout;
