@@ -29,10 +29,10 @@ const Logout = () => {
 
         console.log(res);
         console.log('logout しました');
-        navigate('/dashboard');
+        navigate('/login');
       } catch (e) {
         console.log(e);
-        navigate('/dashboard');
+        navigate('/login');
       }
     };
 
