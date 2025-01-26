@@ -43,8 +43,8 @@ class UserController extends BaseController
     public function create (Request $request)
     {
         $rules = [
-            'name' => 'required',
-            'email' => 'required|email',
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|unique:users',
             'password' => 'required',
         ];
 
