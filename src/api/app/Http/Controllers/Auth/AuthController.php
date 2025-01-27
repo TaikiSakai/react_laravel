@@ -79,8 +79,8 @@ class AuthController extends BaseController
     public function loggedIn()
     {
         return $this->sendResponse(
-            'User Aleady Logged In',
-            ['message' => 'User Aleady Logged In'],
+            'User Already Logged In',
+            ['message' => 'User Already Logged In'],
         );
     }
 }
