@@ -20,8 +20,6 @@ class UserControllerTest extends TestCase
         $response->assertStatus(401);
         $response = $response->json();
 
-        dump($response);
-
         $this->assertEquals("Unauthenticated.", $response['message']);
     }
 
