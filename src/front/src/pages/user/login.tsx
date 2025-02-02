@@ -72,7 +72,7 @@ const Login = () => {
   };
 
   return (
-    <Box sx={{ backGroundColor: 'e6f2ff', height: '100vh' }}>
+    <Box sx={{ backgroundColor: '#ebedeb', height: '100vh' }}>
       <Grid container>
         <Grid 
           size={{ xs: 12, lg: 12 }} 

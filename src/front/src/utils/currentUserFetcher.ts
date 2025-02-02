@@ -13,7 +13,7 @@ const fetchCurrentUser = async () => {
     const headers = { 'Content-Type': 'application/json' };  
 
     try {
-      axios({
+      await axios({
         method: 'GET',
         headers: headers,
         url: baseURL + '/api/current_user',

@@ -9,6 +9,5 @@ createRoot(document.getElementById('root')!).render(
     <CurrentUserProvider>
       <AppRoutes />
     </CurrentUserProvider>
-    {/* <AppRoutes /> */}
   </React.StrictMode>
 );
