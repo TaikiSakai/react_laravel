@@ -79,6 +79,7 @@ class UserController extends BaseController
             $request->session()->invalidate();
             $request->session()->regenerateToken();
 
+            
             return $this->sendResponse('User Deleted', []);
         }
     }
