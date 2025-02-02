@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\BaseController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends BaseController
@@ -63,6 +64,22 @@ class UserController extends BaseController
 
         if ($user->save()) {
             return $this->sendResponse('User Created', [$user]);
+        }
+    }
+
+    public function destroy(Request $request)
+    {
+        $user = $request->user();
+
+        Auth::guard('web')->logout();
+
+        // $user->session()->delete();
+        
+        if ($user->delete()) {
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            return $this->sendResponse('User Deleted', []);
         }
     }
 }
