@@ -10,6 +10,12 @@ const  Dashboard = () => {
       <Button variant='contained'>
         <Link to='/app'>AppHome</Link>
       </Button>
+      <Button variant='contained'>
+        <Link to='/login'>login</Link>
+      </Button>
+      <Button variant='contained'>
+        <Link to='/logout'>logout</Link>
+      </Button>
       <Outlet />
     </div>
   );

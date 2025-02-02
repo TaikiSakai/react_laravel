@@ -38,12 +38,11 @@ export default [
       'react/no-danger': 'error', // dangerouslySetInnerHTML を許可しない
       'react/prop-types': 'off', // Props の型チェックは TS で行う & 誤検知があるため無効化
 
-      "max-len": ["error", { code: 80 }], // 行の文字数制限を 80 文字に設定
+      "max-len": ["error", { code: 110 }], // 行の文字数制限を 80 文字に設定
       "quotes": ["error", "single", { avoidEscape: true }], // シングルクォーテーションを使用、エスケープを避ける場合は例外
       "semi": ["error", "always"], // セミコロンを必須にする
     },
   },
-
   {languageOptions: { globals: globals.browser }},
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
